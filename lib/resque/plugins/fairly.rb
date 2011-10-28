@@ -32,7 +32,7 @@ module Resque::Plugins
 
     def self.included(klass)
       klass.instance_eval do
-        if ENV['QUEUE'] != "*"
+        if ENV['QUEUE'] == "*"
           alias_method :queues_alpha_ordered, :queues
           alias_method :queues, :queues_randomly_ordered
         end
