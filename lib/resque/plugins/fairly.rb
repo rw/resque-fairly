@@ -31,9 +31,11 @@ module Resque::Plugins
     end
 
     def self.included(klass)
-      klass.instance_eval do 
-        alias_method :queues_alpha_ordered, :queues
-        alias_method :queues, :queues_randomly_ordered
+      klass.instance_eval do
+        if ENV['QUEUE'] != "*"
+          alias_method :queues_alpha_ordered, :queues
+          alias_method :queues, :queues_randomly_ordered
+        end
       end
     end
   end
